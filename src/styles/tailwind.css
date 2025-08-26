@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-background: #FFFFFF; /* white */
+    --color-foreground: #212529; /* gray-900 */
+    --color-border: #E5E7EB; /* gray-200 */
+    --color-input: #FFFFFF; /* white */
+    --color-ring: #52B788; /* green-500 */
+    
+    /* Card Colors */
+    --color-card: #FFFFFF; /* white */
+    --color-card-foreground: #212529; /* gray-900 */
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #212529; /* gray-900 */
+    
+    /* Muted Colors */
+    --color-muted: #F8F9FA; /* gray-50 */
+    --color-muted-foreground: #6C757D; /* gray-500 */
+    
+    /* Primary Colors - Authority Green */
+    --color-primary: #1B4332; /* green-900 */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors - Action Green */
+    --color-secondary: #52B788; /* green-500 */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors - Success Gold */
+    --color-accent: #D4AF37; /* yellow-600 */
+    --color-accent-foreground: #1B4332; /* green-900 */
+    
+    /* Status Colors */
+    --color-success: #28A745; /* green-600 */
+    --color-success-foreground: #FFFFFF; /* white */
+    
+    --color-warning: #FFC107; /* yellow-500 */
+    --color-warning-foreground: #1B4332; /* green-900 */
+    
+    --color-error: #DC3545; /* red-600 */
+    --color-error-foreground: #FFFFFF; /* white */
+    
+    --color-destructive: #DC3545; /* red-600 */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Surface Colors */
+    --color-surface: #F8F9FA; /* gray-50 */
+    --color-surface-foreground: #212529; /* gray-900 */
+    
+    /* Text Colors */
+    --color-text-primary: #212529; /* gray-900 */
+    --color-text-secondary: #6C757D; /* gray-500 */
+    
+    /* Shadow Variables */
+    --shadow-default: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+    /* Border Radius */
+    --radius: 0.5rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-headline {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-body {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  .font-accent {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .shadow-cta {
+    box-shadow: var(--shadow-default);
+  }
+  
+  .transition-smooth {
+    transition: all 200ms ease-in-out;
+  }
+}
