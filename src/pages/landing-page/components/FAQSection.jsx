@@ -11,47 +11,47 @@ const FAQSection = () => {
       question: 'How do you ensure confidentiality of sensitive campaign materials?',
       answer: `We maintain strict confidentiality protocols for all political campaigns. Our team signs NDAs, materials are handled in secure facilities, and we have separate production lines for sensitive political content. All digital files are encrypted and stored securely, with access limited to authorized personnel only. We understand the sensitive nature of political campaigns and have served over 800 campaigns without a single confidentiality breach.`,
       caseStudy: 'Presidential Campaign 2022 - Complete confidentiality maintained',
-      contactInfo: 'For confidentiality concerns: security@lunagraphics.co.ke'
+      contactInfo: 'For confidentiality concerns: info.lunagraphics@gmail.com'
     },
     {
       category: 'Pricing & Discounts',
       question: 'What bulk pricing tiers are available for large campaign orders?',
       answer: `Our bulk pricing structure offers significant savings: 10% off for 100-199 pieces, 15% off for 200-499 pieces, 25% off for 500-999 pieces, and 30% off for 1000+ pieces. We also offer package deals for complete campaign material sets. Payment terms include 50% deposit with balance on delivery, and we accept bank transfers, mobile money, and cash payments. Special financing options available for registered political parties.`,
       caseStudy: 'Gubernatorial Campaign saved KES 450,000 with bulk pricing',
-      contactInfo: 'For pricing inquiries: quotes@lunagraphics.co.ke'
+      contactInfo: 'For pricing inquiries: info.lunagraphics@gmail.com'
     },
     {
       category: 'Rush Orders & Delivery',
       question: 'Can you handle same-day delivery for urgent campaign needs?',
       answer: `Yes, we specialize in rush orders for political campaigns. Same-day delivery is available for orders placed before 10 AM, with delivery by 6 PM within Nairobi. Express delivery (1-2 days) covers major towns across Kenya. Rush orders incur a 20% premium, express orders 10% premium. We maintain emergency stock of common materials and have dedicated rush production lines. Our record: 4-hour turnaround for 5,000 posters during a campaign crisis.`,
       caseStudy: 'MP Campaign - 10,000 posters delivered in 6 hours',
-      contactInfo: 'Rush orders hotline: +254 700 000 000'
+      contactInfo: 'Rush orders hotline: +254 791 159 618'
     },
     {
       category: 'Design & Revisions',
       question: 'How many design revisions are included, and what if I need more?',
       answer: `All packages include 3 free design revisions. Additional revisions are charged at KES 2,000 each for major changes, KES 500 for minor adjustments. We provide initial design concepts within 24 hours, revisions within 12 hours. Our design team specializes in political campaigns and understands voter psychology, color psychology, and effective political messaging. We can work with your existing brand guidelines or create a complete visual identity.`,
       caseStudy: 'County Assembly Campaign - 7 revisions perfected winning design',
-      contactInfo: 'Design team: design@lunagraphics.co.ke'
+      contactInfo: 'Design team: info.lunagraphics@gmail.com'
     },
     {
       category: 'Quality & Materials',
       question: 'What materials do you use and how weather-resistant are they?',
       answer: `We use premium weather-resistant materials: 440gsm PVC for outdoor banners (5+ year lifespan), 350gsm synthetic paper for posters (waterproof, tear-resistant), UV-resistant inks that won't fade in sunlight. T-shirts use 100% cotton with screen printing or heat transfer. Vehicle wraps use 3M vinyl with 7-year outdoor durability. All materials are tested for Kenyan weather conditions including heavy rains and intense sun. We guarantee material quality for the entire campaign period.`,
-      caseStudy: 'Presidential Campaign materials survived entire rainy season',contactInfo: 'Quality assurance: quality@lunagraphics.co.ke'
+      caseStudy: 'Presidential Campaign materials survived entire rainy season',contactInfo: 'Quality assurance: info.lunagraphics@gmail.com'
     },
     {
       category: 'Payment & Terms',question: 'What payment methods do you accept and what are your terms?',
       answer: `We accept multiple payment methods: Bank transfers (RTGS, EFT), M-Pesa and Airtel Money, Cash payments at our offices, Cheques from registered entities. Payment terms: 50% deposit to commence production, 50% balance on delivery. Credit terms available for established political parties and repeat clients. We provide detailed invoices and receipts for campaign finance compliance. All payments are processed securely with transaction confirmations.`,
-      caseStudy: 'Flexible payment terms helped 15 MCA campaigns',contactInfo: 'Accounts department: accounts@lunagraphics.co.ke'
+      caseStudy: 'Flexible payment terms helped 15 MCA campaigns',contactInfo: 'Accounts department: info.lunagraphics@gmail.com'
     },
     {
       category: 'Coverage & Delivery',question: 'Which areas do you deliver to across Kenya?',
       answer: `We deliver nationwide across Kenya. Same-day delivery in Nairobi and surrounding areas, next-day delivery to major towns (Mombasa, Kisumu, Nakuru, Eldoret, Nyeri, Meru, Machakos), 2-3 days to other counties. We have partnerships with reliable courier services and local agents. Delivery costs vary by location and urgency. Free delivery for orders above KES 50,000 within Nairobi, above KES 100,000 to major towns. Special arrangements for remote constituencies.`,
-      caseStudy: 'Delivered to all 47 counties for national campaign',contactInfo: 'Logistics team: delivery@lunagraphics.co.ke'
+      caseStudy: 'Delivered to all 47 counties for national campaign',contactInfo: 'Logistics team: info.lunagraphics@gmail.com'
     },
     {
-      category: 'Campaign Strategy',question: 'Do you provide campaign strategy advice beyond printing?',answer: `While we focus on printing and materials, our team has extensive political campaign experience. We provide guidance on material placement strategies, voter psychology in design choices, optimal quantities based on constituency size, and timing of material distribution. We can recommend complementary services like digital marketing agencies, event planners, and campaign consultants from our network. Our consultation is included free with orders above KES 100,000.`,caseStudy: 'Strategic advice contributed to 15% vote increase',contactInfo: 'Campaign consultation: strategy@lunagraphics.co.ke'
+      category: 'Campaign Strategy',question: 'Do you provide campaign strategy advice beyond printing?',answer: `While we focus on printing and materials, our team has extensive political campaign experience. We provide guidance on material placement strategies, voter psychology in design choices, optimal quantities based on constituency size, and timing of material distribution. We can recommend complementary services like digital marketing agencies, event planners, and campaign consultants from our network. Our consultation is included free with orders above KES 100,000.`,caseStudy: 'Strategic advice contributed to 15% vote increase',contactInfo: 'Campaign consultation: info.lunagraphics@gmail.com'
     }
   ];
 
@@ -186,9 +186,9 @@ const FAQSection = () => {
                 iconName="Phone"
                 iconPosition="left"
                 className="font-headline font-headline-bold"
-                onClick={() => window.open('tel:+254700000000', '_self')}
+                onClick={() => window.open('tel:+254791159618', '_self')}
               >
-                Call Now: +254 700 000 000
+                Call Now: +254 791 159 618
               </Button>
             </div>
           </div>
@@ -208,7 +208,7 @@ const FAQSection = () => {
               variant="outline"
               size="sm"
               className="font-headline font-headline-bold"
-              onClick={() => window.open('tel:+254700000000', '_self')}
+              onClick={() => window.open('tel:+254791159618', '_self')}
             >
               Rush Hotline
             </Button>
@@ -226,7 +226,7 @@ const FAQSection = () => {
               variant="outline"
               size="sm"
               className="font-headline font-headline-bold"
-              onClick={() => window.open('mailto:info@lunagraphics.co.ke', '_self')}
+              onClick={() => window.open('mailto:info.lunagraphics@gmail.com', '_self')}
             >
               Send Email
             </Button>
@@ -244,7 +244,7 @@ const FAQSection = () => {
               variant="outline"
               size="sm"
               className="font-headline font-headline-bold"
-              onClick={() => window.open('https://wa.me/254700000000', '_blank')}
+              onClick={() => window.open('https://wa.me/254791159618', '_blank')}
             >
               Chat Now
             </Button>

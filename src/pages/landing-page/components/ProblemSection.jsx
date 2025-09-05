@@ -72,7 +72,7 @@ const ProblemSection = () => {
             {/* Before Image */}
             <div className="absolute inset-0">
               <Image
-                src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                src="/assets/before.png"
                 alt="Amateur DIY campaign materials with poor design and quality"
                 className="w-full h-full object-cover"
               />
@@ -87,7 +87,7 @@ const ProblemSection = () => {
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                src="/assets/after.png"
                 alt="Professional Luna Graphics campaign materials with premium design and quality"
                 className="w-full h-full object-cover"
               />

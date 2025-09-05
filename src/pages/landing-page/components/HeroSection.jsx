@@ -12,9 +12,9 @@ const HeroSection = () => {
   });
 
   const metrics = [
-    { label: "Campaigns Served", value: 847, suffix: "+", color: "text-secondary" },
-    { label: "Materials Printed This Month", value: 12450, suffix: "+", color: "text-accent" },
-    { label: "Average Delivery Time", value: 4, suffix: " hrs", color: "text-success" }
+    { label: "Campaigns Served", value: 20, suffix: "+", color: "text-secondary" },
+    { label: "Materials Printed This Month", value: 1200, suffix: "+", color: "text-accent" },
+    { label: "Average Delivery Time", value: 5, suffix: " hrs", color: "text-success" }
   ];
 
   useEffect(() => {
@@ -38,9 +38,9 @@ const HeroSection = () => {
       }, 30);
     };
 
-    animateCount(847, 'campaigns');
-    animateCount(12450, 'materials');
-    animateCount(4, 'deliveryTime');
+    animateCount(20, 'campaigns');
+    animateCount(1200, 'materials');
+    animateCount(5, 'deliveryTime');
   }, []);
 
   const handleQuoteClick = () => {
@@ -58,7 +58,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen bg-gradient-to-br from-primary via-primary/95 to-primary/90 overflow-hidden">
+    <section id="hero" className="relative min-h-screen bg-primary overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
@@ -81,7 +81,7 @@ const HeroSection = () => {
               <span className="text-accent block mt-2">Professional Political Materials</span>
             </h1>
 
-            <p className="font-body text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl">
+            <p className="font-body text-lg md:text-xl text-primary-foreground mb-8 max-w-2xl">
               Kenya's most trusted political campaign printing partner. Same-day turnaround, bulk pricing, and confidential handling for candidates who demand excellence.
             </p>
 
@@ -103,7 +103,7 @@ const HeroSection = () => {
                 onClick={handlePortfolioClick}
                 iconName="Eye"
                 iconPosition="left"
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-headline font-headline-bold"
+                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground font-headline font-headline-bold"
               >
                 View Campaign Portfolio
               </Button>
@@ -119,7 +119,7 @@ const HeroSection = () => {
                     {index === 2 && animatedCounts.deliveryTime}
                     {metric.suffix}
                   </div>
-                  <div className="font-body text-sm text-primary-foreground/80">
+                  <div className="font-body text-sm text-primary-foreground">
                     {metric.label}
                   </div>
                 </div>
@@ -131,7 +131,7 @@ const HeroSection = () => {
           <div className="relative">
             <div className="relative z-10">
               <Image
-                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="/assets/hero.png" // Correct path for images in the public folder
                 alt="Professional political campaign materials including posters, banners, and merchandise"
                 className="rounded-2xl shadow-2xl w-full h-96 object-cover"
               />

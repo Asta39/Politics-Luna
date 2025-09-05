@@ -6,46 +6,21 @@ const FooterSection = () => {
   const currentYear = new Date()?.getFullYear();
 
   const footerLinks = {
-    services: [
-      { label: 'Campaign Posters', href: '#services' },
-      { label: 'Rally Banners', href: '#services' },
-      { label: 'Campaign T-shirts', href: '#services' },
-      { label: 'Vehicle Branding', href: '#services' },
-      { label: 'Digital Assets', href: '#services' },
-      { label: 'Rush Orders', href: '#rush-orders' }
-    ],
     company: [
-      { label: 'About Luna Graphics', href: '#' },
-      { label: 'Our Portfolio', href: '#portfolio' },
-      { label: 'Success Stories', href: '#testimonials' },
-      { label: 'Pricing', href: '#pricing' },
-      { label: 'Contact Us', href: '#contact' },
-      { label: 'Career Opportunities', href: '#' }
+      { label: 'Main website-Luna Graphics', href: 'https://www.lunagraphics.co.ke/' },
+      { label: 'Career Opportunities', href: 'https://www.lunagraphics.co.ke/team-page/' }
     ],
     support: [
       { label: 'FAQ', href: '#faq' },
-      { label: 'Rush Order Hotline', href: 'tel:+254700000000' },
-      { label: 'Email Support', href: 'mailto:support@lunagraphics.co.ke' },
-      { label: 'WhatsApp Chat', href: 'https://wa.me/254700000000' },
-      { label: 'Design Guidelines', href: '#' },
-      { label: 'File Upload Portal', href: '#' }
-    ],
-    legal: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Confidentiality Agreement', href: '#' },
-      { label: 'Campaign Finance Compliance', href: '#' },
-      { label: 'Refund Policy', href: '#' },
-      { label: 'Quality Guarantee', href: '#' }
+      { label: 'Rush Order Hotline', href: 'tel:+254791159618' },
+      { label: 'Email Support', href: 'mailto:info.lunagraphics@gmail.com' },
+      { label: 'WhatsApp Chat', href: 'https://wa.me/254791159618' },
     ]
+   
   };
 
   const socialLinks = [
-    { icon: 'Facebook', href: '#', label: 'Facebook' },
-    { icon: 'Twitter', href: '#', label: 'Twitter' },
-    { icon: 'Instagram', href: '#', label: 'Instagram' },
-    { icon: 'Linkedin', href: '#', label: 'LinkedIn' },
-    { icon: 'Youtube', href: '#', label: 'YouTube' }
+   
   ];
 
   const certifications = [
@@ -80,15 +55,13 @@ const FooterSection = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-7 h-7 text-primary"
-                  fill="currentColor"
-                >
-                  <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                  <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none"/>
-                </svg>
+            <div className="w-12 h-12 bg-card p-1 rounded-lg flex items-center justify-center border border-border">
+                <img 
+                src="/logo.png" 
+                alt="Luna Graphics Logo" 
+                className="h-full w-full object-contain" 
+              />
+                 
               </div>
               <div>
                 <h3 className="font-headline font-headline-bold text-xl text-accent">
@@ -108,11 +81,11 @@ const FooterSection = () => {
             <div className="space-y-3 mb-6">
               <div className="flex items-center space-x-3">
                 <Icon name="Phone" size={16} className="text-accent" />
-                <span className="font-body text-sm">+254 700 000 000</span>
+                <span className="font-body text-sm">+254 791 159 618</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Icon name="Mail" size={16} className="text-accent" />
-                <span className="font-body text-sm">info@lunagraphics.co.ke</span>
+                <span className="font-body text-sm">info.lunagraphics@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Icon name="MapPin" size={16} className="text-accent" />
@@ -140,23 +113,7 @@ const FooterSection = () => {
           </div>
 
           {/* Services Links */}
-          <div>
-            <h4 className="font-headline font-headline-bold text-lg text-accent mb-4">
-              Our Services
-            </h4>
-            <ul className="space-y-2">
-              {footerLinks?.services?.map((link, index) => (
-                <li key={index}>
-                  <button
-                    onClick={() => handleLinkClick(link?.href)}
-                    className="font-body text-sm text-primary-foreground/80 hover:text-accent transition-colors"
-                  >
-                    {link?.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          
 
           {/* Company Links */}
           <div>
@@ -212,7 +169,7 @@ const FooterSection = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder-primary-foreground/60 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                className="flex-1 px-4 py-3 rounded-lg bg-primary-foreground border border-primary-foreground/20 text-primary-foreground placeholder-primary-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                 required
               />
               <Button
@@ -257,6 +214,9 @@ const FooterSection = () => {
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
               <p className="font-body text-primary-foreground/80 text-sm">
                 © {currentYear} Luna Graphics. All rights reserved.
+              </p>
+              <p className="font-body text-primary-foreground/80 text-sm">
+                Made by <a href="https://evoqcreative.co.ke" target="_blank" rel="noopener noreferrer">Evoq</a>
               </p>
               <div className="flex items-center space-x-4">
                 {footerLinks?.legal?.slice(0, 3)?.map((link, index) => (

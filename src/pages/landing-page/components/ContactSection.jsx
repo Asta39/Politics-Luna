@@ -71,37 +71,54 @@ const ContactSection = () => {
   };
 
   const handleSubmit = async (e) => {
-    e?.preventDefault();
+    e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    // Helper to get label from value for cleaner message
+    const getLabel = (arr, value) => arr.find(item => item.value === value)?.label || value;
+
+    // Construct the corporate-styled WhatsApp message
+    let message = `*New Campaign Quote Request - Luna Graphics*\n`;
+    message += `---------------------------------\n\n`;
+    message += `*CLIENT DETAILS*\n`;
+    message += `*- Name:* ${formData.name}\n`;
+    message += `*- Email:* ${formData.email}\n`;
+    message += `*- Phone:* ${formData.phone}\n\n`;
+    message += `*CAMPAIGN DETAILS*\n`;
+    message += `*- Campaign Type:* ${getLabel(campaignTypes, formData.campaignType)}\n`;
+    message += `*- Constituency/Area:* ${formData.constituency}\n\n`;
+    message += `*MATERIAL REQUIREMENTS*\n`;
+    message += `*- Materials Needed:* ${formData.materials.map(m => getLabel(materialTypes, m)).join(', ')}\n`;
+    message += `*- Estimated Quantity:* ${formData.quantity || 'Not specified'}\n`;
+    message += `*- Required Delivery Date:* ${formData.deliveryDate || 'Not specified'}\n`;
+    message += `*- Budget Range:* ${getLabel(budgetRanges, formData.budget) || 'Not specified'}\n\n`;
+    message += `*SPECIAL OPTIONS*\n`;
+    message += `*- Rush Order (24hrs):* ${formData.rushOrder ? 'YES' : 'NO'}\n`;
+    message += `*- Confidential Handling:* ${formData.confidential ? 'YES' : 'NO'}\n\n`;
     
-    // Simulate form submission
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      
-      // Reset form after successful submission
-      setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          campaignType: '',
-          constituency: '',
-          materials: [],
-          quantity: '',
-          deliveryDate: '',
-          budget: '',
-          message: '',
-          rushOrder: false,
-          confidential: false
-        });
-        setSubmitStatus(null);
-      }, 3000);
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
+    if (formData.message) {
+      message += `*ADDITIONAL MESSAGE*\n`;
+      message += `${formData.message}\n\n`;
     }
+    
+    const requestID = `LG${Date.now().toString().slice(-6)}`;
+    message += `-- Request ID: #${requestID} --`;
+
+    const phoneNumber = "254791159618";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Show success message and reset the form
+    setSubmitStatus({ status: 'success', id: requestID });
+    setIsSubmitting(false);
+    setFormData({
+      name: '', email: '', phone: '', campaignType: '', constituency: '',
+      materials: [], quantity: '', deliveryDate: '', budget: '', message: '',
+      rushOrder: false, confidential: false
+    });
   };
 
   const contactMethods = [
@@ -109,32 +126,32 @@ const ContactSection = () => {
       icon: 'Phone',
       title: 'Rush Order Hotline',
       description: 'For urgent campaign material needs',
-      contact: '+254 700 000 000',
-      action: () => window.open('tel:+254700000000', '_self'),
+      contact: '+254 791 159 618',
+      action: () => window.open('tel:+254791159618', '_self'),
       available: '24/7 During Campaign Season'
     },
     {
       icon: 'Mail',
       title: 'Email Quotes',
       description: 'Detailed quotes and consultations',
-      contact: 'quotes@lunagraphics.co.ke',
-      action: () => window.open('mailto:quotes@lunagraphics.co.ke', '_self'),
+      contact: 'info.lunagraphics@gmail.com',
+      action: () => window.open('mailto:info.lunagraphics@gmail.com', '_self'),
       available: 'Response within 2 hours'
     },
     {
       icon: 'MessageCircle',
       title: 'WhatsApp Business',
       description: 'Quick quotes and file sharing',
-      contact: '+254 700 000 000',
-      action: () => window.open('https://wa.me/254700000000?text=Hi! I need a quote for political campaign materials for 2027 elections.', '_blank'),
+      contact: '+254 791 159 618',
+      action: () => window.open('https://wa.me/254791159618?text=Hi! I need a quote for political campaign materials.', '_blank'),
       available: 'Instant messaging'
     },
     {
       icon: 'MapPin',
       title: 'Visit Our Office',
       description: 'See samples and discuss in person',
-      contact: 'Nairobi CBD, Kenya',
-      action: () => window.open('https://maps.google.com?q=-1.2921,36.8219', '_blank'),
+      contact: 'Nairobi CBD, Kweria Road, Kenya',
+      action: () => window.open('https://maps.google.com?q=-1.2800970245344157,36.82274805944331', '_blank'),
       available: 'Mon-Sat: 8AM-6PM'
     }
   ];
@@ -165,28 +182,28 @@ const ContactSection = () => {
                 Request Your Campaign Quote
               </h3>
 
-              {submitStatus === 'success' && (
+              {submitStatus?.status === 'success' && (
                 <div className="mb-6 p-4 bg-success/10 border border-success/20 rounded-xl">
                   <div className="flex items-center space-x-3">
                     <Icon name="CheckCircle" size={20} className="text-success" />
                     <div>
-                      <h4 className="font-body font-body-semibold text-success">Quote Request Submitted!</h4>
+                      <h4 className="font-body font-body-semibold text-success">Quote Request Sent!</h4>
                       <p className="font-body text-success/80 text-sm">
-                        We'll contact you within 2 hours with your personalized quote. Reference: #LG{Date.now()?.toString()?.slice(-6)}
+                        Please confirm by sending the pre-filled message on WhatsApp. Ref: #{submitStatus.id}
                       </p>
                     </div>
                   </div>
                 </div>
               )}
 
-              {submitStatus === 'error' && (
+              {submitStatus?.status === 'error' && (
                 <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-xl">
                   <div className="flex items-center space-x-3">
                     <Icon name="AlertCircle" size={20} className="text-error" />
                     <div>
                       <h4 className="font-body font-body-semibold text-error">Submission Failed</h4>
                       <p className="font-body text-error/80 text-sm">
-                        Please try again or contact us directly at +254 700 000 000
+                        Please try again or contact us directly at +254 791 159 618
                       </p>
                     </div>
                   </div>
@@ -194,134 +211,38 @@ const ContactSection = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Personal Information */}
                 <div className="grid md:grid-cols-2 gap-6">
-                  <Input
-                    label="Full Name"
-                    type="text"
-                    value={formData?.name}
-                    onChange={(e) => handleInputChange('name', e?.target?.value)}
-                    placeholder="Enter your full name"
-                    required
-                  />
-                  <Input
-                    label="Email Address"
-                    type="email"
-                    value={formData?.email}
-                    onChange={(e) => handleInputChange('email', e?.target?.value)}
-                    placeholder="your.email@example.com"
-                    required
-                  />
+                  <Input label="Full Name" type="text" value={formData.name} onChange={(e) => handleInputChange('name', e.target.value)} placeholder="Enter your full name" required />
+                  <Input label="Email Address" type="email" value={formData.email} onChange={(e) => handleInputChange('email', e.target.value)} placeholder="your.email@example.com" required />
                 </div>
-
                 <div className="grid md:grid-cols-2 gap-6">
-                  <Input
-                    label="Phone Number"
-                    type="tel"
-                    value={formData?.phone}
-                    onChange={(e) => handleInputChange('phone', e?.target?.value)}
-                    placeholder="+254 700 000 000"
-                    required
-                  />
-                  <Select
-                    label="Campaign Type"
-                    options={campaignTypes}
-                    value={formData?.campaignType}
-                    onChange={(value) => handleInputChange('campaignType', value)}
-                    placeholder="Select campaign type"
-                    required
-                  />
+                  <Input label="Phone Number (WhatsApp)" type="tel" value={formData.phone} onChange={(e) => handleInputChange('phone', e.target.value)} placeholder="+254 791 159 618" required />
+                  <Select label="Campaign Type" options={campaignTypes} value={formData.campaignType} onChange={(value) => handleInputChange('campaignType', value)} placeholder="Select campaign type" required />
                 </div>
-
-                <Input
-                  label="Constituency/Area"
-                  type="text"
-                  value={formData?.constituency}
-                  onChange={(e) => handleInputChange('constituency', e?.target?.value)}
-                  placeholder="e.g., Kiambu East, Nairobi County"
-                  required
-                />
-
-                {/* Materials Selection */}
+                <Input label="Constituency/Area" type="text" value={formData.constituency} onChange={(e) => handleInputChange('constituency', e.target.value)} placeholder="e.g., Kiambu East, Nairobi County" required />
                 <div>
-                  <label className="block font-body font-body-semibold text-text-primary mb-3">
-                    Campaign Materials Needed *
-                  </label>
+                  <label className="block font-body font-body-semibold text-text-primary mb-3">Campaign Materials Needed *</label>
                   <div className="grid md:grid-cols-3 gap-3">
-                    {materialTypes?.map((material) => (
-                      <Checkbox
-                        key={material?.value}
-                        label={material?.label}
-                        checked={formData?.materials?.includes(material?.value)}
-                        onChange={(e) => handleMaterialChange(material?.value, e?.target?.checked)}
-                      />
+                    {materialTypes.map((material) => (
+                      <Checkbox key={material.value} label={material.label} checked={formData.materials.includes(material.value)} onChange={(e) => handleMaterialChange(material.value, e.target.checked)} />
                     ))}
                   </div>
                 </div>
-
                 <div className="grid md:grid-cols-2 gap-6">
-                  <Input
-                    label="Estimated Quantity"
-                    type="text"
-                    value={formData?.quantity}
-                    onChange={(e) => handleInputChange('quantity', e?.target?.value)}
-                    placeholder="e.g., 5000 posters, 500 t-shirts"
-                  />
-                  <Input
-                    label="Required Delivery Date"
-                    type="date"
-                    value={formData?.deliveryDate}
-                    onChange={(e) => handleInputChange('deliveryDate', e?.target?.value)}
-                    min={new Date()?.toISOString()?.split('T')?.[0]}
-                  />
+                  <Input label="Estimated Quantity" type="text" value={formData.quantity} onChange={(e) => handleInputChange('quantity', e.target.value)} placeholder="e.g., 5000 posters, 500 t-shirts" />
+                  <Input label="Required Delivery Date" type="date" value={formData.deliveryDate} onChange={(e) => handleInputChange('deliveryDate', e.target.value)} min={new Date().toISOString().split('T')[0]} />
                 </div>
-
-                <Select
-                  label="Budget Range"
-                  options={budgetRanges}
-                  value={formData?.budget}
-                  onChange={(value) => handleInputChange('budget', value)}
-                  placeholder="Select your budget range"
-                />
-
+                <Select label="Budget Range" options={budgetRanges} value={formData.budget} onChange={(value) => handleInputChange('budget', value)} placeholder="Select your budget range" />
                 <div>
-                  <label className="block font-body font-body-semibold text-text-primary mb-2">
-                    Additional Requirements
-                  </label>
-                  <textarea
-                    value={formData?.message}
-                    onChange={(e) => handleInputChange('message', e?.target?.value)}
-                    placeholder="Tell us about your specific requirements, design preferences, or any special needs..."
-                    rows={4}
-                    className="w-full px-4 py-3 border border-border rounded-lg font-body text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                  />
+                  <label className="block font-body font-body-semibold text-text-primary mb-2">Additional Requirements</label>
+                  <textarea value={formData.message} onChange={(e) => handleInputChange('message', e.target.value)} placeholder="Tell us about your specific requirements, design preferences, or any special needs..." rows={4} className="w-full px-4 py-3 border border-border rounded-lg font-body text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none" />
                 </div>
-
-                {/* Special Options */}
                 <div className="space-y-3">
-                  <Checkbox
-                    label="This is a rush order (needed within 24 hours)"
-                    checked={formData?.rushOrder}
-                    onChange={(e) => handleInputChange('rushOrder', e?.target?.checked)}
-                  />
-                  <Checkbox
-                    label="This campaign requires confidential handling"
-                    checked={formData?.confidential}
-                    onChange={(e) => handleInputChange('confidential', e?.target?.checked)}
-                  />
+                  <Checkbox label="This is a rush order (needed within 24 hours)" checked={formData.rushOrder} onChange={(e) => handleInputChange('rushOrder', e.target.checked)} />
+                  <Checkbox label="This campaign requires confidential handling" checked={formData.confidential} onChange={(e) => handleInputChange('confidential', e.target.checked)} />
                 </div>
-
-                <Button
-                  type="submit"
-                  variant="default"
-                  size="lg"
-                  fullWidth
-                  loading={isSubmitting}
-                  iconName="Send"
-                  iconPosition="left"
-                  className="bg-primary hover:bg-primary/90 font-headline font-headline-bold"
-                >
-                  {isSubmitting ? 'Submitting Quote Request...' : 'Get My Campaign Quote'}
+                <Button type="submit" variant="default" size="lg" fullWidth loading={isSubmitting} iconName="Send" iconPosition="left" className="bg-primary hover:bg-primary/90 font-headline font-headline-bold">
+                  {isSubmitting ? 'Preparing Your Message...' : 'Get Quote via WhatsApp'}
                 </Button>
               </form>
             </div>
@@ -330,34 +251,19 @@ const ContactSection = () => {
           {/* Contact Methods */}
           <div className="space-y-6">
             <div className="bg-card rounded-2xl p-6 shadow-sm border border-border">
-              <h3 className="font-headline font-headline-bold text-xl text-text-primary mb-6">
-                Contact Us Directly
-              </h3>
-              
+              <h3 className="font-headline font-headline-bold text-xl text-text-primary mb-6">Contact Us Directly</h3>
               <div className="space-y-4">
-                {contactMethods?.map((method, index) => (
-                  <div
-                    key={index}
-                    className="p-4 border border-border rounded-xl hover:bg-muted/50 transition-colors cursor-pointer"
-                    onClick={method?.action}
-                  >
+                {contactMethods.map((method, index) => (
+                  <div key={index} className="p-4 border border-border rounded-xl hover:bg-muted/50 transition-colors cursor-pointer" onClick={method.action}>
                     <div className="flex items-start space-x-4">
                       <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Icon name={method?.icon} size={20} className="text-primary" />
+                        <Icon name={method.icon} size={20} className="text-primary" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-body font-body-semibold text-text-primary mb-1">
-                          {method?.title}
-                        </h4>
-                        <p className="font-body text-text-secondary text-sm mb-2">
-                          {method?.description}
-                        </p>
-                        <p className="font-body font-body-semibold text-primary text-sm mb-1">
-                          {method?.contact}
-                        </p>
-                        <p className="font-body text-text-secondary text-xs">
-                          {method?.available}
-                        </p>
+                        <h4 className="font-body font-body-semibold text-text-primary mb-1">{method.title}</h4>
+                        <p className="font-body text-text-secondary text-sm mb-2">{method.description}</p>
+                        <p className="font-body font-body-semibold text-primary text-sm mb-1">{method.contact}</p>
+                        <p className="font-body text-text-secondary text-xs">{method.available}</p>
                       </div>
                       <Icon name="ExternalLink" size={16} className="text-text-secondary" />
                     </div>
@@ -365,70 +271,29 @@ const ContactSection = () => {
                 ))}
               </div>
             </div>
-
-            {/* Office Location */}
+            
             <div className="bg-card rounded-2xl p-6 shadow-sm border border-border">
-              <h3 className="font-headline font-headline-bold text-xl text-text-primary mb-4">
-                Visit Our Office
-              </h3>
-              
+              <h3 className="font-headline font-headline-bold text-xl text-text-primary mb-4">Visit Our Office</h3>
               <div className="space-y-4">
                 <div className="h-48 rounded-xl overflow-hidden">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    loading="lazy"
-                    title="Luna Graphics Office Location"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps?q=-1.2921,36.8219&z=14&output=embed"
-                    className="border-0"
-                  />
+                  <iframe width="100%" height="100%" loading="lazy" title="Luna Graphics Office Location" referrerPolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps?q=-1.2800970245344157,36.82274805944331&z=15&output=embed`} className="border-0" />
                 </div>
-                
                 <div className="space-y-2">
-                  <div className="flex items-center space-x-3">
-                    <Icon name="MapPin" size={16} className="text-primary" />
-                    <span className="font-body text-text-secondary text-sm">
-                      Luna Graphics Office, Nairobi CBD, Kenya
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <Icon name="Clock" size={16} className="text-primary" />
-                    <span className="font-body text-text-secondary text-sm">
-                      Mon-Sat: 8:00 AM - 6:00 PM
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <Icon name="Car" size={16} className="text-primary" />
-                    <span className="font-body text-text-secondary text-sm">
-                      Free parking available
-                    </span>
-                  </div>
+                  <div className="flex items-center space-x-3"><Icon name="MapPin" size={16} className="text-primary" /><span className="font-body text-text-secondary text-sm">Luna Graphics Office, Nairobi CBD, Kenya</span></div>
+                  <div className="flex items-center space-x-3"><Icon name="Clock" size={16} className="text-primary" /><span className="font-body text-text-secondary text-sm">Mon-Sat: 8:00 AM - 6:00 PM</span></div>
+                  <div className="flex items-center space-x-3"><Icon name="Car" size={16} className="text-primary" /><span className="font-body text-text-secondary text-sm">Free parking available</span></div>
                 </div>
               </div>
             </div>
 
-            {/* Emergency Contact */}
             <div className="bg-gradient-to-r from-warning/10 to-error/10 rounded-2xl p-6 border border-warning/20">
               <div className="flex items-center space-x-3 mb-4">
                 <Icon name="AlertTriangle" size={24} className="text-warning" />
-                <h3 className="font-headline font-headline-bold text-lg text-text-primary">
-                  Campaign Emergency?
-                </h3>
+                <h3 className="font-headline font-headline-bold text-lg text-text-primary">Campaign Emergency?</h3>
               </div>
-              <p className="font-body text-text-secondary text-sm mb-4">
-                Need materials urgently? Our emergency hotline is available 24/7 during campaign season for critical printing needs.
-              </p>
-              <Button
-                variant="default"
-                size="sm"
-                fullWidth
-                iconName="Phone"
-                iconPosition="left"
-                className="bg-warning hover:bg-warning/90 text-primary font-headline font-headline-bold"
-                onClick={() => window.open('tel:+254700000000', '_self')}
-              >
-                Emergency Hotline: +254 700 000 000
+              <p className="font-body text-text-secondary text-sm mb-4">Need materials urgently? Our emergency hotline is available 24/7 during campaign season for critical printing needs.</p>
+              <Button variant="default" size="sm" fullWidth iconName="Phone" iconPosition="left" className="bg-warning hover:bg-warning/90 text-primary font-headline font-headline-bold" onClick={() => window.open('tel:+254791159618', '_self')}>
+                Emergency Hotline: +254 791 159 618
               </Button>
             </div>
           </div>

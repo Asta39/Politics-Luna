@@ -93,45 +93,7 @@ const SectionProgressIndicator = () => {
           </div>
         </div>
       </div>
-      {/* Mobile Horizontal Progress Bar */}
-      <div className="lg:hidden fixed top-header-height left-0 right-0 z-floating bg-background/90 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-4 py-2">
-          <div className="flex items-center space-x-1 overflow-x-auto">
-            {sections?.map((section, index) => {
-              const isActive = activeSection === section?.id;
-              const isPassed = sections?.findIndex(s => s?.id === activeSection) > index;
-              
-              return (
-                <button
-                  key={section?.id}
-                  onClick={() => handleSectionClick(section?.id)}
-                  className={`flex items-center space-x-1 px-2 py-1 rounded-md text-xs font-body font-body-semibold transition-all duration-200 whitespace-nowrap ${
-                    isActive 
-                      ? 'bg-primary text-primary-foreground' 
-                      : isPassed 
-                        ? 'bg-secondary/20 text-secondary' :'text-text-secondary hover:text-text-primary hover:bg-muted'
-                  }`}
-                >
-                  <span>{section?.icon}</span>
-                  <span className="hidden sm:inline">{section?.label}</span>
-                </button>
-              );
-            })}
-          </div>
-          
-          <div className="ml-4 text-xs font-body text-text-secondary">
-            {Math.round(scrollProgress)}%
-          </div>
-        </div>
-        
-        {/* Progress Line */}
-        <div className="h-0.5 bg-border">
-          <div 
-            className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-300 ease-out"
-            style={{ width: `${scrollProgress}%` }}
-          />
-        </div>
-      </div>
+      
     </>
   );
 };

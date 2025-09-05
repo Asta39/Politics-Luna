@@ -10,10 +10,10 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Hon. James Mwangi',
-      position: 'Member of Parliament, Kiambu East',
+      name: ' Daniel Kamau',
+      position: 'Campaign Manager',
       result: 'Won with 58% votes',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+      image: '/assets/none.png',
       testimonial: `Luna Graphics transformed our entire campaign visual identity. Their same-day delivery service was crucial during the final campaign push. The quality of materials was exceptional - our posters stood out in every location and created the professional image we needed to win voter confidence.`,
       materials: ['10,000 A2 Posters', '500 T-shirts', '50 Banners', '5 Vehicle Wraps'],
       rating: 5,
@@ -22,10 +22,10 @@ const TestimonialsSection = () => {
     },
     {
       id: 2,
-      name: 'Hon. Mary Wanjiku',
-      position: 'Governor, Nairobi County',
+      name: 'Olivia Nafula',
+      position: 'Campaign Manager',
       result: 'Won with 62% votes',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+      image: '/assets/none.png',
       testimonial: `Working with Luna Graphics was the best decision for our gubernatorial campaign. Their understanding of political campaigns and ability to deliver under pressure is unmatched. The digital assets they created for our social media campaigns reached over 2 million voters and significantly boosted our online presence.`,
       materials: ['Digital Campaign Package', '15,000 Posters', '1,000 T-shirts', '100 Banners'],
       rating: 5,
@@ -34,10 +34,10 @@ const TestimonialsSection = () => {
     },
     {
       id: 3,
-      name: 'Hon. Peter Kamau',
-      position: 'Member of Parliament, Kiambu West',
+      name: 'Samuel Wanjohi',
+      position: 'Campaign Manager',
       result: 'Won with 54% votes',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+      image: '/assets/none.png',
       testimonial: `Luna Graphics delivered beyond our expectations. Their bulk pricing helped us maximize our campaign budget, and the quality never compromised. The confidential handling of our sensitive campaign materials gave us peace of mind. I recommend them to any serious political candidate.`,
       materials: ['8,000 A3 Posters', '300 T-shirts', '25 Banners', '50,000 Flyers'],
       rating: 5,
@@ -46,10 +46,10 @@ const TestimonialsSection = () => {
     },
     {
       id: 4,
-      name: 'Hon. Grace Njeri',
-      position: 'Member of County Assembly, Nakuru',
+      name: 'Natasha Njoki',
+      position: 'Campaign Manager',
       result: 'Won with 67% votes',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+      image: '/assets/none.png',
       testimonial: `As a first-time candidate, Luna Graphics guided me through the entire campaign materials process. Their expertise in political campaigns was invaluable. The materials were delivered on time, within budget, and helped create the professional image that contributed to our landslide victory.`,
       materials: ['3,000 A4 Posters', '200 T-shirts', '15 Banners', '20,000 Flyers'],
       rating: 5,
@@ -59,9 +59,9 @@ const TestimonialsSection = () => {
     {
       id: 5,
       name: 'David Ochieng',
-      position: 'Campaign Manager, Presidential Campaign',
+      position: 'Campaign Manager',
       result: 'Managed winning campaign',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+      image: '/assets/none.png',
       testimonial: `Managing a presidential campaign requires reliable partners, and Luna Graphics proved to be exactly that. Their ability to handle massive orders while maintaining quality and confidentiality is remarkable. They understand the unique pressures of political campaigns and deliver accordingly.`,
       materials: ['50,000 Posters', '5,000 T-shirts', '500 Banners', '20 Vehicle Wraps'],
       rating: 5,
@@ -89,6 +89,17 @@ const TestimonialsSection = () => {
 
   const goToTestimonial = (index) => {
     setCurrentTestimonial(index);
+  };
+
+  const handleQuoteClick = () => {
+    const contactSection = document.querySelector('#contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleCallClick = () => {
+    window.location.href = 'tel:+254791159618';
   };
 
   const current = testimonials?.[currentTestimonial];
@@ -274,6 +285,7 @@ const TestimonialsSection = () => {
               iconName="MessageSquare"
               iconPosition="left"
               className="bg-primary hover:bg-primary/90 font-headline font-headline-bold"
+              onClick={handleQuoteClick}
             >
               Get Your Quote Today
             </Button>
@@ -283,6 +295,7 @@ const TestimonialsSection = () => {
               iconName="Phone"
               iconPosition="left"
               className="font-headline font-headline-bold"
+              onClick={handleCallClick}
             >
               Call for Rush Orders
             </Button>

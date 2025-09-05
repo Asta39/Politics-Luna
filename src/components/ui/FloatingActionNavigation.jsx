@@ -46,7 +46,7 @@ const FloatingActionNavigation = () => {
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+254700000000'; // Replace with actual WhatsApp Business number
+    const phoneNumber = '+254791159618'; // Replace with actual WhatsApp Business number
     const message = encodeURIComponent('Hi! I need a quote for political campaign materials for 2027 elections.');
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };

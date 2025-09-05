@@ -1,45 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../AppIcon';
 import Button from './Button';
+// Assuming your logo is in public/assets/images/logo.png
+// No import is needed if the assets are in the public folder.
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Updated navigation items
   const navigationItems = [
     { id: 'services', label: 'Services', href: '#services' },
     { id: 'portfolio', label: 'Portfolio', href: '#portfolio' },
     { id: 'pricing', label: 'Pricing', href: '#pricing' },
-    { id: 'rush-orders', label: 'Rush Orders', href: '#rush-orders' },
-    { id: 'contact', label: 'Contact', href: '#contact' }
+    { id: 'contact', label: 'Contact', href: '#contact' },
+    { id: 'main-site', label: 'Main Website', href: 'https://lunagraphics.co.ke', external: true }
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
       
-      // Update active section based on scroll position
-      const sections = navigationItems?.map(item => document.getElementById(item?.id))?.filter(Boolean);
+      const sections = navigationItems
+        .filter(item => !item.external)
+        .map(item => document.getElementById(item.id))
+        .filter(Boolean);
+        
       const scrollPosition = window.scrollY + 100;
 
-      for (let i = sections?.length - 1; i >= 0; i--) {
-        const section = sections?.[i];
-        if (section && section?.offsetTop <= scrollPosition) {
-          setActiveSection(navigationItems?.[i]?.id);
-          break;
+      let currentSection = '';
+      for (const section of sections) {
+        if (section.offsetTop <= scrollPosition) {
+          currentSection = section.id;
         }
       }
+      setActiveSection(currentSection);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navigationItems]);
 
   const handleNavClick = (href) => {
     const element = document.querySelector(href);
     if (element) {
-      element?.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
   };
@@ -47,55 +53,71 @@ const Header = () => {
   const handleQuoteClick = () => {
     const contactSection = document.querySelector('#contact');
     if (contactSection) {
-      contactSection?.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMenuOpen(false);
+  };
+
+  const handleCallClick = () => {
+    window.location.href = 'tel:+254791159618';
+    setIsMenuOpen(false);
   };
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-header transition-smooth ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-background/95 backdrop-blur-sm shadow-sm' : 'bg-background'
       }`}
     >
-      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-header-height">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-6 h-6 text-primary-foreground"
-                  fill="currentColor"
-                >
-                  <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                  <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none"/>
-                </svg>
-              </div>
-              <div>
-                <h1 className="font-headline font-headline-bold text-xl text-primary">
-                  Luna Graphics
-                </h1>
-                <p className="text-xs text-text-secondary font-body">
-                  Political Campaign Printing
-                </p>
-              </div>
+          <a href="/" className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-card p-1 rounded-lg flex items-center justify-center border border-border">
+              {/* Replaced SVG with an Image tag */}
+              <img 
+                src="/logo.png" 
+                alt="Luna Graphics Logo" 
+                className="h-full w-full object-contain" 
+              />
             </div>
-          </div>
+            <div>
+              <h1 className="font-headline font-headline-bold text-xl text-primary">
+                Luna Graphics
+              </h1>
+              <p className="text-xs text-text-secondary font-body">
+                Political Campaign Printing
+              </p>
+            </div>
+          </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigationItems?.map((item) => (
-              <button
-                key={item?.id}
-                onClick={() => handleNavClick(item?.href)}
-                className={`font-body font-body-semibold text-sm transition-smooth hover:text-primary ${
-                  activeSection === item?.id 
-                    ? 'text-primary border-b-2 border-primary pb-1' :'text-text-primary'
-                }`}
-              >
-                {item?.label}
-              </button>
+          <nav className="hidden lg:flex items-center space-x-6">
+            {navigationItems.map((item) => (
+              item.external ? (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body font-body-semibold text-sm transition-colors hover:text-primary text-text-primary flex items-center"
+                >
+                  {item.label}
+                  <Icon name="ExternalLink" size={14} className="ml-1.5" />
+                </a>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.href)}
+                  className={`font-body font-body-semibold text-sm transition-colors hover:text-primary ${
+                    activeSection === item.id 
+                      ? 'text-primary' 
+                      : 'text-text-primary'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
           </nav>
 
@@ -112,7 +134,7 @@ const Header = () => {
             <Button
               variant="default"
               size="sm"
-              onClick={handleQuoteClick}
+              onClick={handleCallClick}
               iconName="Phone"
               iconPosition="left"
               className="font-headline font-headline-bold bg-secondary hover:bg-secondary/90"
@@ -124,7 +146,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-text-primary hover:text-primary hover:bg-muted transition-smooth"
+            className="lg:hidden p-2 rounded-md text-text-primary hover:text-primary hover:bg-muted transition-colors"
             aria-label="Toggle menu"
           >
             <Icon 
@@ -134,21 +156,35 @@ const Header = () => {
           </button>
         </div>
       </div>
+      
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border shadow-lg">
+      <div className={`lg:hidden bg-background border-t border-border shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'}`}>
           <div className="px-4 py-4 space-y-4">
-            {navigationItems?.map((item) => (
-              <button
-                key={item?.id}
-                onClick={() => handleNavClick(item?.href)}
-                className={`block w-full text-left py-2 px-3 rounded-md font-body font-body-semibold transition-smooth ${
-                  activeSection === item?.id
-                    ? 'text-primary bg-primary/10' :'text-text-primary hover:text-primary hover:bg-muted'
-                }`}
-              >
-                {item?.label}
-              </button>
+            {navigationItems.map((item) => (
+              item.external ? (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between w-full text-left py-2 px-3 rounded-md font-body font-body-semibold transition-colors text-text-primary hover:text-primary hover:bg-muted"
+                >
+                  <span>{item.label}</span>
+                  <Icon name="ExternalLink" size={16} />
+                </a>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.href)}
+                  className={`block w-full text-left py-2 px-3 rounded-md font-body font-body-semibold transition-colors ${
+                    activeSection === item.id
+                      ? 'text-primary bg-primary/10' 
+                      : 'text-text-primary hover:text-primary hover:bg-muted'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
             
             <div className="pt-4 border-t border-border space-y-3">
@@ -163,7 +199,7 @@ const Header = () => {
               <Button
                 variant="default"
                 fullWidth
-                onClick={handleQuoteClick}
+                onClick={handleCallClick}
                 iconName="Phone"
                 iconPosition="left"
                 className="font-headline font-headline-bold bg-secondary hover:bg-secondary/90"
@@ -173,7 +209,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-      )}
     </header>
   );
 };
