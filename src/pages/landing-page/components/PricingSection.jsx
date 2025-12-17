@@ -13,7 +13,7 @@ const PricingSection = () => {
   const [rushFee, setRushFee] = useState(0);
 
   const materials = [
-    { value: 'posters', label: 'Campaign Posters (A3)', basePrice: 30, unit: 'per piece' },
+    { value: 'posters', label: 'Campaign Posters (A3)', basePrice: 50, unit: 'per piece' },
     { value: 'banners', label: 'Rally Banners (1m by 3m)', basePrice: 1500, unit: 'per banner' },
     { value: 'tshirts', label: 'Campaign T-shirts', basePrice: 650, unit: 'per shirt' },
     { value: 'flyers', label: 'Campaign Flyers (A5)', basePrice: 10, unit: 'per piece' },
@@ -30,7 +30,7 @@ const PricingSection = () => {
   const pricingTiers = [
     {
       name: 'Starter Campaign',
-      price: 'From KES 100,000',
+      price: 'From KES 200,000',
       description: 'Perfect for MCA and local campaigns',
       features: [
         '500 A3 Posters',
@@ -45,7 +45,7 @@ const PricingSection = () => {
     },
     {
       name: 'Professional Campaign',
-      price: 'From KES 300,000',
+      price: 'From KES 400,000',
       description: 'Ideal for MP and county campaigns',
       features: [
         '2,000 A4 Posters',
@@ -62,7 +62,7 @@ const PricingSection = () => {
     },
     {
       name: 'Premium Campaign',
-      price: 'From KES 1,000,000',
+      price: 'From KES 2,000,000',
       description: 'Complete solution for major campaigns',
       features: [
         '10,000 A1 Posters',
